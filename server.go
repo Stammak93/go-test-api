@@ -17,7 +17,7 @@ func main() {
 	
 	e := echo.New()
 	ctx := context.Background()
-	db := pg_test.Connect_Db()
+	db := pg_test.DB
 
 	db.NewCreateTable().Model((*models.User)(nil)).Exec(ctx)
 	db.AddQueryHook(bundebug.NewQueryHook(bundebug.WithVerbose(true)))
@@ -37,5 +37,4 @@ func main() {
 	if err := server.ListenAndServe(); err != http.ErrServerClosed {
 		log.Fatal(err)
 	}
-	log.Println("Listening on port 4000")
 }
